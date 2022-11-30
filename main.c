@@ -12,14 +12,20 @@ int	main()
 
 	fd = open("file.txt", O_RDONLY);
 	line = get_next_line(fd);
-	//while(line)
-	//{
-	//	printf("LINE: %s", line);
-	//	printf("\n");
-	//	line = get_next_line(fd);
-	//	i++;
-	//}
-	printf("LINE: %s", line);
+	while(line)
+	{
+		printf("LINE: %s", line);
+		printf("\n");
+		line = get_next_line(fd);
+		i++;
+	}
+	printf("LINE: %s\n", line);
+	/*
+	line = get_next_line(fd);
+	printf("LINE: %s\n", line);
+	line = get_next_line(fd);
+	printf("LINE: %s\n", line);
+	*/
 	close(fd);
 	return (0);
 }

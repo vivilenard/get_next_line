@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:35:51 by vlenard           #+#    #+#             */
-/*   Updated: 2022/11/30 16:31:30 by vlenard          ###   ########.fr       */
+/*   Updated: 2022/11/30 20:17:23 by karllenard       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	n;
 
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	printf("%zu\n", ft_strlen(s1));
 	str = malloc(len * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0' && ft_strlen(s1) != 0)
+	while (ft_strlen(s1) > 0 && s1[i] != '\0')
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	printf("%zu\n", len);
 	n = 0;
 	while (s2[n] != '\0')
 	{
@@ -56,6 +54,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
+
 char	*ft_strchr(const char *s, int c)
 {
 	size_t			i;
@@ -63,6 +62,8 @@ char	*ft_strchr(const char *s, int c)
 
 	uc = (unsigned char) c;
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
 		if (s[i] == uc)
@@ -93,4 +94,16 @@ char	*ft_strdup(char *s)
 	if (i == len)
 		*(scpy + i) = *(s + i);
 	return (scpy);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = '\0';
+		i++;
+	}
 }
