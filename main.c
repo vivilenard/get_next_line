@@ -15,7 +15,6 @@ int	main()
 	while(line)
 	{
 		printf("LINE: %s", line);
-		printf("\n");
 		line = get_next_line(fd);
 		i++;
 	}
@@ -27,5 +26,6 @@ int	main()
 	printf("LINE: %s\n", line);
 	*/
 	close(fd);
+	//system("leaks a.out");
 	return (0);
 }

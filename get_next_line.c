@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:35:47 by vlenard           #+#    #+#             */
-/*   Updated: 2022/11/30 20:52:20 by karllenard       ###   ########.fr       */
+/*   Updated: 2022/12/01 12:48:15 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ char *ft_readtostat(int fd, char *stat)
 			return (NULL);
 		ft_bzero(buf, BUFFER_SIZE + 1);
 		flag = read(fd, buf, BUFFER_SIZE);
+		printf("%d\n", flag);
 		if (flag == -1 || flag == 0)
 		{
-			printf("stati %s\n", stat);
 			return (free(buf), stat);
 		}
-			printf("buf %s\n", buf);
 		stat = ft_strjoin(stat, buf);
-		free (buf);
 	}
-	printf("flag %d\n", flag);
 	return (stat);
 }
 char *ft_stattoline(char *stat, char **line)
@@ -45,8 +42,10 @@ char *ft_stattoline(char *stat, char **line)
 
 	while (stat[i] != '\n' && stat[i] != '\0')
 		i++;
-	printf("%d\n", i);
-	*line = malloc(i + 1);
+	if (stat[i] == '\n')
+		*line = malloc(i + 2);
+	else if (stat[i] == '\0')
+		*line = malloc(i + 1);
 	if (!*line)
 		return (NULL);
 	i = 0;
@@ -55,14 +54,19 @@ char *ft_stattoline(char *stat, char **line)
 		*(*line + i) = stat[i];
 		i++;
 	}
-		printf("%d\n", i);
-		printf("trueline %s\n", *line);
 	if (stat[i] == '\n')
+	{
+		*(*line + i) = '\n';
+		*(*line + i + 1) = '\0';
+	}
+	if (stat[i] == '\0') //|| ((stat[i] == '\0') && stat[i + 1] == '\n')
+	{
 		*(*line + i) = '\0';
-	if (stat[i] == '\0')
-		return (NULL);
+		return (free (stat), NULL);
+	}
+		//return (free (*line), NULL);
 	buf = ft_strdup(stat + i + 1);
-	return (buf);
+	return (free (stat), buf);
 }
 
 char *get_next_line(int fd)
@@ -71,15 +75,10 @@ char *get_next_line(int fd)
 	char *line;
 	
 	line = NULL;
-	printf("stat1 %s\n", stat);
 	stat = ft_readtostat(fd, stat);
-	printf("stat1.5 %s\n", stat);
+	// printf("stat %s\n", stat);
 	if (stat == NULL)
 		return (NULL);
-		printf("stat2 %s\n", stat);
 	stat = ft_stattoline(stat, &line);
-		printf("stat3 %s\n", stat);
-		printf("line %s\n", line);
 	return (line);
 }
-

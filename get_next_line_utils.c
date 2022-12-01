@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+        */
+/*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:35:51 by vlenard           #+#    #+#             */
-/*   Updated: 2022/11/30 20:17:23 by karllenard       ###   ########.fr       */
+/*   Updated: 2022/12/01 12:13:45 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		n++;
 	}
 	str[len - 1] = '\0';
-	return (str);
+	return (free ((char *)s1), free ((char *)s2), str);
 }
 
 
