@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:35:47 by vlenard           #+#    #+#             */
-/*   Updated: 2022/12/01 12:48:15 by vlenard          ###   ########.fr       */
+/*   Updated: 2022/12/01 12:58:42 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char *ft_readtostat(int fd, char *stat)
 			return (NULL);
 		ft_bzero(buf, BUFFER_SIZE + 1);
 		flag = read(fd, buf, BUFFER_SIZE);
-		printf("%d\n", flag);
+			//printf("%d\n", flag);
 		if (flag == -1 || flag == 0)
 		{
 			return (free(buf), stat);
@@ -59,7 +59,13 @@ char *ft_stattoline(char *stat, char **line)
 		*(*line + i) = '\n';
 		*(*line + i + 1) = '\0';
 	}
-	if (stat[i] == '\0') //|| ((stat[i] == '\0') && stat[i + 1] == '\n')
+	if ((stat[i] == '\n') && stat[i + 1] == '\0')
+	{
+		*(*line + i) = '\n';
+		*(*line + i + 1) = '\0';
+		return (free (stat), NULL);
+	}
+	if (stat[i] == '\0') //|| ((stat[i] == '\n') && stat[i + 1] == '\0'))
 	{
 		*(*line + i) = '\0';
 		return (free (stat), NULL);
@@ -75,8 +81,8 @@ char *get_next_line(int fd)
 	char *line;
 	
 	line = NULL;
+		//printf("stat %s\n", stat);
 	stat = ft_readtostat(fd, stat);
-	// printf("stat %s\n", stat);
 	if (stat == NULL)
 		return (NULL);
 	stat = ft_stattoline(stat, &line);
