@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:35:47 by vlenard           #+#    #+#             */
-/*   Updated: 2022/12/02 13:12:23 by vlenard          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:22:23 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,15 @@ char	*ft_stattoline(char *stat, char **line)
 
 char	*get_next_line(int fd)
 {
-	static char	*stat;
+	static char	*stat[1000];
 	char		*line;
 
-	line = NULL;
-	stat = ft_readtostat(fd, stat);
-	if (stat == NULL)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stat = ft_stattoline(stat, &line);
+	line = NULL;
+	stat[fd] = ft_readtostat(fd, stat[fd]);
+	if (stat[fd] == NULL)
+		return (NULL);
+	stat[fd] = ft_stattoline(stat[fd], &line);
 	return (line);
 }
