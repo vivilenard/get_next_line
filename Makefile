@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: karllenard <karllenard@student.42.fr>      +#+  +:+       +#+         #
+#    By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 13:39:13 by vlenard           #+#    #+#              #
-#    Updated: 2022/11/30 20:48:41 by karllenard       ###   ########.fr        #
+#    Updated: 2022/12/02 11:42:06 by vlenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Werror -Wextra
 SRC = get_next_line.c get_next_line_utils.c
 OBJS = $(SRC:.c=.o)
 NAME = gnl.a
-N = 2
+N = 1
 
 all: $(NAME) 
 $(NAME) : $(OBJS) 

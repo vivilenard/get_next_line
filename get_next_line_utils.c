@@ -6,7 +6,7 @@
 /*   By: vlenard <vlenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:35:51 by vlenard           #+#    #+#             */
-/*   Updated: 2022/12/01 12:13:45 by vlenard          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:18:46 by vlenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,34 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
 	size_t	i;
-	size_t	len;
 	size_t	n;
 
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = malloc(len * sizeof(char));
+	if (!s1)
+	{
+		s1 = malloc(1);
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
+	}
+	if (!s2)
+		return (NULL);
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (ft_strlen(s1) > 0 && s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
 	n = 0;
-	while (s2[n] != '\0')
-	{
-		str[i] = s2[n];
-		i++;
-		n++;
-	}
-	str[len - 1] = '\0';
-	return (free ((char *)s1), free ((char *)s2), str);
+	while (s1[i])
+		str[i++] = s1[n++];
+	n = 0;
+	while (s2[n])
+		str[i++] = s2[n++];
+	str[i] = '\0';
+	return (free (s1), free (s2), str);
 }
-
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -63,6 +63,8 @@ char	*ft_strchr(const char *s, int c)
 	uc = (unsigned char) c;
 	i = 0;
 	if (!s)
+		return (0);
+	if (s[0] == '\0')
 		return (0);
 	while (s[i])
 	{

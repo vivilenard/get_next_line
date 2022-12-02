@@ -10,7 +10,7 @@ int	main()
 	char *line;
 	int i = 0;
 
-	fd = open("file.txt", O_RDONLY);
+	fd = open("big_line_no_nl", O_RDONLY);
 	line = get_next_line(fd);
 	while(line)
 	{
